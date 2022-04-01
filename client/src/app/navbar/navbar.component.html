@@ -1,0 +1,42 @@
+<td-layout #layout>
+  <td-layout-nav-list>
+    <div td-sidenav-toolbar-content layout="row" flex>
+      <div>
+        <h3>Prattle</h3>
+      </div>
+    </div>
+    <mat-nav-list td-sidenav-content>
+      <h3 md-subheader>CHANNELS (2)</h3>
+      <a mat-list-item><mat-icon md-list-icon>sort</mat-icon> general</a>
+      <a mat-list-item><mat-icon md-list-icon>chat</mat-icon> hangout</a>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <h3 md-subheader>ONLINE USERS (4)</h3>
+      <ng-template
+        let-item
+        let-i="index"
+        let-last="last"
+        ngFor
+        [ngForOf]="[0, 1, 2, 3]"
+      >
+        <a mat-list-item
+          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{ i }}</a
+        >
+      </ng-template>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <h3 md-subheader>DIRECT MESSAGES</h3>
+      <ng-template
+        let-item
+        let-i="index"
+        let-last="last"
+        ngFor
+        [ngForOf]="[0, 1, 2, 3, 4, 5]"
+      >
+        <a mat-list-item
+          ><mat-icon md-list-icon>add_a_photo</mat-icon> username{{ i }}</a
+        >
+      </ng-template>
+    </mat-nav-list>
+  </td-layout-nav-list>
+</td-layout>
