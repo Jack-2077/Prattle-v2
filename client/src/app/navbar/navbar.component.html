@@ -1,5 +1,8 @@
 <td-layout #layout>
   <td-layout-nav-list>
+    <div id="chatroom-render" *ngIf="display">
+      <app-general-chatroom></app-general-chatroom>
+    </div>
     <div td-sidenav-toolbar-content layout="row" flex>
       <div>
         <h3>Prattle</h3>
@@ -7,7 +10,9 @@
     </div>
     <mat-nav-list td-sidenav-content>
       <h3 md-subheader>CHANNELS (2)</h3>
-      <a mat-list-item><mat-icon md-list-icon>sort</mat-icon> general</a>
+      <a mat-list-item (click)="onPress()"
+        ><mat-icon md-list-icon>sort</mat-icon> general</a
+      >
       <a mat-list-item><mat-icon md-list-icon>chat</mat-icon> hangout</a>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>

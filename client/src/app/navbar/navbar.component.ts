@@ -9,4 +9,9 @@ export class NavbarComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  display = false;
+  onPress() {
+    this.display = !this.display;
+  }
 }

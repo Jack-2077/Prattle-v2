@@ -22,9 +22,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GeneralChatroomComponent } from './general-chatroom/general-chatroom.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthButtonComponent, NavbarComponent],
+  declarations: [AppComponent, AuthButtonComponent, NavbarComponent, GeneralChatroomComponent],
   imports: [
     CovalentLayoutModule,
     BrowserModule,
