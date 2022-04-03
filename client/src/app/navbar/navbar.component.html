@@ -43,5 +43,24 @@
         >
       </ng-template>
     </mat-nav-list>
+    <td-layout-footer-inner id="message-box">
+      <div layout="row" layout-align="start center">
+        <mat-form-field
+          class="push-left push-right"
+          flex
+          layout="row"
+          floatPlaceholder="never"
+        >
+          <mat-label id="text-label">Enter text here</mat-label>
+          <textarea
+            matInput
+            flex
+            placeholder="Ex. I really like this app"
+            id="text-box"
+          ></textarea>
+        </mat-form-field>
+        <mat-icon>send</mat-icon>
+      </div>
+    </td-layout-footer-inner>
   </td-layout-nav-list>
 </td-layout>

@@ -25,7 +25,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { GeneralChatroomComponent } from './general-chatroom/general-chatroom.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthButtonComponent, NavbarComponent, GeneralChatroomComponent],
+  declarations: [
+    AppComponent,
+    AuthButtonComponent,
+    NavbarComponent,
+    GeneralChatroomComponent,
+  ],
   imports: [
     CovalentLayoutModule,
     BrowserModule,
