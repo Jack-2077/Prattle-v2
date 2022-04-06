@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentSearchModule } from '@covalent/core/search';
@@ -24,6 +25,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { LoginComponent } from './login/login.component';
 
+const config: SocketIoConfig = { url: 'http://127.0.0.1:5000/', options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,7 @@ import { LoginComponent } from './login/login.component';
       domain: 'dev-cystsk94.us.auth0.com',
       clientId: 'jgyBuUkSsBchlFjuBUSsgUw37VQskL1Q',
     }),
+    SocketIoModule.forRoot(config),
     BrowserAnimationsModule,
     MatIconModule,
     MatCardModule,

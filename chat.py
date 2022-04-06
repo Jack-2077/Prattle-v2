@@ -22,7 +22,9 @@ def on_disconnect():
 
 @socketio.on('sign_in')
 def user_sign_in(user_name, methods=['GET', 'POST']):
-    users[request.sid] = user_name['name']
+    print("-----------------------------------")
+    users[request.sid] = user_name
+    print(user_name)
     socketio.emit('current_users', users)
     print("New user sign in!\nThe users are: ", users)
 
