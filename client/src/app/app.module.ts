@@ -22,6 +22,7 @@ import { GeneralChatroomComponent } from './general-chatroom/general-chatroom.co
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthButtonComponent } from './auth-button/auth-button.component';
     AuthButtonComponent,
     GeneralChatroomComponent,
     HomepageComponent,
+    LoginComponent,
   ],
   imports: [
     CovalentLayoutModule,
