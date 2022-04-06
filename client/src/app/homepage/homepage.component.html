@@ -1,4 +1,4 @@
-<!-- <td-layout #layout>
+<td-layout #layout>
   <td-layout-nav-list>
     <div id="chatroom-render" *ngIf="display">
       <app-general-chatroom></app-general-chatroom>
@@ -17,6 +17,7 @@
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
       <h3 md-subheader>ONLINE USERS (4)</h3>
+
       <ng-template
         let-item
         let-i="index"
@@ -25,8 +26,9 @@
         [ngForOf]="[0, 1, 2, 3]"
       >
         <a mat-list-item
-          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{ i }}</a
+          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{ i }} Hello {{USER}}</a
         >
+
       </ng-template>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
@@ -63,10 +65,6 @@
       </div>
     </td-layout-footer-inner>
   </td-layout-nav-list>
-</td-layout> -->
+</td-layout>
 
-<ul *ngIf="auth.user$ | async as user">
-  <li>{{ user.name }}</li>
-  <li>{{ user.email }}</li>
-  <li>{{ user | json }}</li>
-</ul>
+
