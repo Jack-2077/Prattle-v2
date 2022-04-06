@@ -8,13 +8,11 @@ import { map } from 'rxjs';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
-
 export class HomepageComponent implements OnInit {
   @Input() userList: any;
   @Input() USER: any;
 
   constructor(public auth: AuthService, public socket: Socket) {
-
     let authArray = [];
     let userName;
     this.auth.user$.forEach((val) => authArray.push(val));
@@ -25,43 +23,21 @@ export class HomepageComponent implements OnInit {
       userName = authArray[0].nickname;
       socket.emit('sign_in', userName);
     }
-
-    function myStopFunction() {
-      clearTimeout(myTimeout);
-    }
   }
 
-
   ngOnInit(): void {
-    this.userList = this.getUsers();
+    let userlist = [];
+    let users = this.socket
+      .fromEvent('current_users')
+      .pipe(map((data: any) => data));
 
-    const myTimeout = setTimeout(list, 1000);
-    function list() {
-      console.log(this.userList)
-      this.USER = this.userList[0];
-    }
+    users.forEach(async (val) => await userlist.push(Object.values(val)));
 
-
-
-
-    //set
+    this.userList = userlist;
   }
 
   display = false;
   onPress() {
     this.display = !this.display;
   }
-
-
-
-  getUsers() {
-    let userList = [];
-    let users;
-    let something;
-    users = this.socket.fromEvent('current_users').pipe(map((data: any) => data));
-    users.forEach(val => userList.push(Object.values(val)));
-
-  }
-
-
 }

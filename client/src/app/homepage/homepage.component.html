@@ -23,12 +23,14 @@
         let-i="index"
         let-last="last"
         ngFor
-        [ngForOf]="[0, 1, 2, 3]"
+        [ngForOf]="userList"
       >
         <a mat-list-item
-          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{ i }} Hello {{USER}}</a
+          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{
+            i
+          }}
+          Hello {{ userList[0] }}</a
         >
-
       </ng-template>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
@@ -66,5 +68,3 @@
     </td-layout-footer-inner>
   </td-layout-nav-list>
 </td-layout>
-
-
