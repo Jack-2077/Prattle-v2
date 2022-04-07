@@ -1,37 +1,45 @@
 <td-layout #layout>
   <td-layout-nav-list>
-    <div id="chatroom-render" *ngIf="display">
+    <div id="chatroom-render" *ngIf="displayGeneral">
       <app-general-chatroom></app-general-chatroom>
+    </div>
+    <div id="chatroom-render" *ngIf="displayPrivate">
+      <h1>PRIVATE</h1>
     </div>
     <div td-sidenav-toolbar-content layout="row" flex>
       <div>
         <h3>Prattle</h3>
+        <button id="logout-btn" (click)="auth.logout({ returnTo: document.location.origin })">
+          Log out
+        </button>
       </div>
     </div>
+    <mat-card-content class="card-content" *ngIf="chattingWith">
+    <div [ngClass]="msg.to == chattingWith.id ? 'message_to' : 'message_from' "
+        *ngFor="let msg of chat.messages | filterBy: filter">
+      private-msg{{msg.message}}
+      <span style="color: lightblue; font-size: 10px; font-style: italic;">{{msg.date | date: "HH:mm:ss"}}</span>
+    </div>
+    Socketchat is displaying
+    <div [ngClass]="msgAll.to == chattingWith.id ? 'message_to' : 'message_from' "
+        *ngFor="let msgAll of chat.messagesAll | filterBy: filter">
+      general-msg{{msgAll.message}}
+      <span style="color: rgb(255, 0, 21); font-size: 10px; font-style: italic;">{{msgAll.date | date: "HH:mm:ss"}}</span>
+    </div>
+  </mat-card-content>
     <mat-nav-list td-sidenav-content>
       <h3 md-subheader>CHANNELS (2)</h3>
-      <a mat-list-item (click)="onPress()"
-        ><mat-icon md-list-icon>sort</mat-icon> general</a
-      >
-      <a mat-list-item><mat-icon md-list-icon>chat</mat-icon> hangout</a>
+      <a mat-list-item (click)="onPress()">
+        <mat-icon md-list-icon>sort</mat-icon> general
+      </a>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
-      <h3 md-subheader>ONLINE USERS (4)</h3>
-
-      <ng-template
-        let-item
-        let-i="index"
-        let-last="last"
-        ngFor
-        [ngForOf]="userList"
-      >
-        <a mat-list-item
-          ><mat-icon color="accent" md-list-icon>lens</mat-icon> user-{{
-            i
-          }}
-          Hello {{ userList[0] }}</a
-        >
-      </ng-template>
+      <h3 md-subheader>ONLINE USERS</h3>
+      <mat-selection-list #usersList [multiple]="false" (selectionChange)="openChat($event, usersList.selectedOptions.selected[0].value)">
+        <mat-list-option *ngFor="let user of userList | keyvalue" [value]="user" (click)="onPrivatePress()">
+          {{ user.value }}
+        </mat-list-option>
+      </mat-selection-list>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
       <h3 md-subheader>DIRECT MESSAGES</h3>
@@ -60,10 +68,12 @@
             matInput
             flex
             placeholder="Ex. I really like this app"
-            id="text-box"
+            [(ngModel)]="messageText"
+            id="input-message"
+            (keydown.enter)="sendMessage()"
           ></textarea>
         </mat-form-field>
-        <mat-icon>send</mat-icon>
+        <mat-icon (click)="sendMessage()">send</mat-icon>
       </div>
     </td-layout-footer-inner>
   </td-layout-nav-list>

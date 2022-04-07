@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentSearchModule } from '@covalent/core/search';
@@ -38,7 +40,9 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:5000/', options: {} };
   imports: [
     CovalentLayoutModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
+    FilterPipeModule,
     AuthModule.forRoot({
       domain: 'dev-cystsk94.us.auth0.com',
       clientId: 'jgyBuUkSsBchlFjuBUSsgUw37VQskL1Q',
