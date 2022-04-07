@@ -8,7 +8,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 
 import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentSearchModule } from '@covalent/core/search';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -40,6 +40,7 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:5000/', options: {} };
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     FilterPipeModule,
     AuthModule.forRoot({
       domain: 'dev-cystsk94.us.auth0.com',

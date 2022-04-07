@@ -29,9 +29,10 @@
               [ngForOf]="[0]"
             >
               <mat-list-item>
-                <img mat-list-avatar src="{{ authPicture }}" />
+                <img mat-list-avatar src="https://cdn-icons.flaticon.com/png/512/1144/premium/1144709.png?token=exp=1649313759~hmac=94cab94f6a3c9b3766450a04bd4a4bdc" />
 
                 <p mat-line>
+
                   <span class="text-wrap message-text">
                     {{ msg.message }}
                   </span>
@@ -68,18 +69,6 @@
       </mat-selection-list>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
-      <h3 md-subheader>DIRECT MESSAGES</h3>
-      <ng-template
-        let-item
-        let-i="index"
-        let-last="last"
-        ngFor
-        [ngForOf]="[0, 1, 2, 3, 4, 5]"
-      >
-        <a mat-list-item
-          ><mat-icon md-list-icon>add_a_photo</mat-icon> username{{ i }}</a
-        >
-      </ng-template>
     </mat-nav-list>
     <td-layout-footer-inner id="message-box">
       <div layout="row" layout-align="start center">

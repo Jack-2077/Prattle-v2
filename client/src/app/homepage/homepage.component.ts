@@ -5,6 +5,8 @@ import { map } from 'rxjs';
 import { UserDetails } from '../models/user-details.model';
 import { ChatService } from './chat.service';
 import { DOCUMENT } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-homepage',
@@ -24,7 +26,8 @@ export class HomepageComponent implements OnInit {
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     public socket: Socket,
-    public chat: ChatService
+    public chat: ChatService,
+    private readonly http: HttpClient
   ) {
     let authArray = [];
     let userName;
@@ -39,6 +42,9 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.http.get('http://127.0.0.1:5000/getusers').subscribe((data) => {
+      console.log(data);
+    })
     this.chat.getUsers().subscribe((users) => {
       this.userList = users;
     });

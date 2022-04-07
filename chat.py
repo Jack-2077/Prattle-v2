@@ -1,16 +1,21 @@
-from flask import Flask, render_template, session, request
+from flask import Flask, render_template, session, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 from datetime import datetime
-
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app)
 
+
+databaseUsers = 'mongodb+srv://2650:2650@cluster0.qphsl.mongodb.net/prattle?retryWrites=true&w=majority'
+mongoDB = PyMongo(app, uri=databaseUsers)
+dbCollectionGenMsg = mongoDB.db.generalMessages
+dbCollectionUser  = mongoDB.db.Users
+
 users = {}
-users['general'] = 'general'
 @socketio.on('connect')
 def on_connect():
     print('Client connected')
@@ -26,7 +31,7 @@ def on_disconnect():
 def user_sign_in(user_name, methods=['GET', 'POST']):
     print("-----------------------------------")
     users[request.sid] = user_name
-    print(user_name)
+    addToMongo(user_name)
     socketio.emit('current_users', users)
     print("New user sign in!\nThe users are: ", users)
 
@@ -43,6 +48,19 @@ def messageAll(message, methods=['GET', 'POST']):
     #   socketio.emit(broadcast, message)
     #socketio.emit('msgAll', message, room='general')
     print(message, "=== to general")
+
+def addToMongo(username, methods=['GET', 'POST']):
+    if dbCollectionUser.find_one({"username": username}):
+        return jsonify(message = "The username is already in the database."), 409
+    else:
+        userJson = {}
+        userJson["username"] = username
+        dbCollectionUser.insert_one(userJson)
+        return jsonify(message="User added successfully"), 201
+
+@app.route('/getusers',methods=['GET','POST'])
+def showUsers():
+    return dbCollectionUser.find({})
 
 
 if __name__ == '__main__':
