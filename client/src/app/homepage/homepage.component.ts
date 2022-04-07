@@ -19,6 +19,7 @@ export class HomepageComponent implements OnInit {
   chattingWith: UserDetails;
   filter: any;
   general: any;
+  authPicture: any;
   constructor( @Inject(DOCUMENT) public document: Document,public auth: AuthService, public socket: Socket, public chat: ChatService) {
     let authArray = [];
     let userName;
@@ -45,22 +46,38 @@ export class HomepageComponent implements OnInit {
       this.chat.messagesAll.push(messageAll)
       console.log(messageAll + "---------line 46-----")
     })
+    console.log(this.chat.chattingWith)
     this.chat.chattingWith.subscribe(user => {
       this.chattingWith = user
-      // this.filter = { $or: [{from: user.id},{to: user.id}]}
+      this.filter = { $or: [{from: user.id},{to: user.id}]}
     })
+    let a;
+    this.auth.user$.subscribe( (val) => {
+     a = val.picture
+     const myTimeout = setTimeout(getPicture, 8000);
+
+      function getPicture() {
+        this.authPicture = a;
+        console.log(this.authPicture + " ---- line64")
+      }
+
+    })
+
+
+      console.log(this.authPicture + " -----line 66");
   }
 
   openChat(event, user) {
     console.log(user.value, user.key);
-    // this.chat.chattingWith.next({
-    //   name: user.value,
-    //   id: user.key
-    // })
+    this.chat.chattingWith.next({
+      name: user.value,
+      id: user.key
+    })
     this.chattingWith = {
       name: user.value,
       id: user.key
     }
+
   }
 
   sendMessage() {

@@ -20,6 +20,7 @@ export class ChatService {
   }
 
   getMessage() {
+    console.log(this.messages);
     return this.socket.fromEvent('message').pipe(map((data: any) => data))
   }
 
@@ -29,11 +30,9 @@ export class ChatService {
 
   sendMessage(message: any){
     this.socket.emit('message', message);
-    console.log(message);
   }
 
   sendMessageToAll(message: any) {
     this.socket.emit('msgAll', message)
-    console.log(message);
   }
 }

@@ -4,7 +4,7 @@
       <app-general-chatroom></app-general-chatroom>
     </div>
     <div id="chatroom-render" *ngIf="displayPrivate">
-      <h1>PRIVATE</h1>
+      <h1>Talking to ... {{chattingWith.name}}!</h1>
     </div>
     <div td-sidenav-toolbar-content layout="row" flex>
       <div>
@@ -17,15 +17,34 @@
     <mat-card-content class="card-content" *ngIf="chattingWith">
     <div [ngClass]="msg.to == chattingWith.id ? 'message_to' : 'message_from' "
         *ngFor="let msg of chat.messages | filterBy: filter">
-      private-msg{{msg.message}}
+
+
+
+<mat-card>
+  <mat-list>
+    <ng-template
+      let-item
+      let-i="index"
+      let-last="last"
+      ngFor
+      [ngForOf]="[0]"
+    >
+      <mat-list-item>
+        <img mat-list-avatar src="{{authPicture}}" />
+
+        <p mat-line>
+          <span class="text-wrap message-text"> {{msg.message}} </span>
+        </p>
+      </mat-list-item>
+      <mat-divider *ngIf="!last" mat-inset></mat-divider>
+    </ng-template>
+  </mat-list>
+</mat-card>
+
+
       <span style="color: lightblue; font-size: 10px; font-style: italic;">{{msg.date | date: "HH:mm:ss"}}</span>
     </div>
-    Socketchat is displaying
-    <div [ngClass]="msgAll.to == chattingWith.id ? 'message_to' : 'message_from' "
-        *ngFor="let msgAll of chat.messagesAll | filterBy: filter">
-      general-msg{{msgAll.message}}
-      <span style="color: rgb(255, 0, 21); font-size: 10px; font-style: italic;">{{msgAll.date | date: "HH:mm:ss"}}</span>
-    </div>
+
   </mat-card-content>
     <mat-nav-list td-sidenav-content>
       <h3 md-subheader>CHANNELS (2)</h3>
