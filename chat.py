@@ -3,7 +3,6 @@ from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 from datetime import datetime
 
-from numpy import broadcast
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'

@@ -1,61 +1,68 @@
 <td-layout #layout>
   <td-layout-nav-list>
-    <div id="chatroom-render" *ngIf="displayGeneral">
-      <app-general-chatroom></app-general-chatroom>
-    </div>
     <div id="chatroom-render" *ngIf="displayPrivate">
-      <h1>Talking to ... {{chattingWith.name}}!</h1>
+      <h1>Talking to ... {{ chattingWith.name }}!</h1>
     </div>
     <div td-sidenav-toolbar-content layout="row" flex>
       <div>
         <h3>Prattle</h3>
-        <button id="logout-btn" (click)="auth.logout({ returnTo: document.location.origin })">
+        <button
+          id="logout-btn"
+          (click)="auth.logout({ returnTo: document.location.origin })"
+        >
           Log out
         </button>
       </div>
     </div>
     <mat-card-content class="card-content" *ngIf="chattingWith">
-    <div [ngClass]="msg.to == chattingWith.id ? 'message_to' : 'message_from' "
-        *ngFor="let msg of chat.messages | filterBy: filter">
+      <div
+        [ngClass]="msg.to == chattingWith.id ? 'message_to' : 'message_from'"
+        *ngFor="let msg of chat.messages | filterBy: filter"
+      >
+        <mat-card>
+          <mat-list>
+            <ng-template
+              let-item
+              let-i="index"
+              let-last="last"
+              ngFor
+              [ngForOf]="[0]"
+            >
+              <mat-list-item>
+                <img mat-list-avatar src="{{ authPicture }}" />
 
+                <p mat-line>
+                  <span class="text-wrap message-text">
+                    {{ msg.message }}
+                  </span>
+                </p>
+              </mat-list-item>
+              <mat-divider *ngIf="!last" mat-inset></mat-divider>
+            </ng-template>
+          </mat-list>
+        </mat-card>
 
-
-<mat-card>
-  <mat-list>
-    <ng-template
-      let-item
-      let-i="index"
-      let-last="last"
-      ngFor
-      [ngForOf]="[0]"
-    >
-      <mat-list-item>
-        <img mat-list-avatar src="{{authPicture}}" />
-
-        <p mat-line>
-          <span class="text-wrap message-text"> {{msg.message}} </span>
-        </p>
-      </mat-list-item>
-      <mat-divider *ngIf="!last" mat-inset></mat-divider>
-    </ng-template>
-  </mat-list>
-</mat-card>
-
-
-      <span style="color: lightblue; font-size: 10px; font-style: italic;">{{msg.date | date: "HH:mm:ss"}}</span>
-    </div>
-
-  </mat-card-content>
+        <span style="color: lightblue; font-size: 10px; font-style: italic">{{
+          msg.date | date: "HH:mm:ss"
+        }}</span>
+      </div>
+    </mat-card-content>
     <mat-nav-list td-sidenav-content>
-      <h3 md-subheader>CHANNELS (2)</h3>
-      <a mat-list-item (click)="onPress()">
-        <mat-icon md-list-icon>sort</mat-icon> general
-      </a>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
       <h3 md-subheader>ONLINE USERS</h3>
-      <mat-selection-list #usersList [multiple]="false" (selectionChange)="openChat($event, usersList.selectedOptions.selected[0].value)">
-        <mat-list-option *ngFor="let user of userList | keyvalue" [value]="user" (click)="onPrivatePress()">
+      <mat-selection-list
+        #usersList
+        [multiple]="false"
+        (selectionChange)="
+          openChat($event, usersList.selectedOptions.selected[0].value)
+        "
+      >
+        <mat-list-option
+          *ngFor="let user of userList | keyvalue"
+          [value]="user"
+          (click)="onPrivatePress()"
+        >
           {{ user.value }}
         </mat-list-option>
       </mat-selection-list>

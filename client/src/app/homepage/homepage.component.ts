@@ -20,7 +20,12 @@ export class HomepageComponent implements OnInit {
   filter: any;
   general: any;
   authPicture: any;
-  constructor( @Inject(DOCUMENT) public document: Document,public auth: AuthService, public socket: Socket, public chat: ChatService) {
+  constructor(
+    @Inject(DOCUMENT) public document: Document,
+    public auth: AuthService,
+    public socket: Socket,
+    public chat: ChatService
+  ) {
     let authArray = [];
     let userName;
     this.auth.user$.forEach((val) => authArray.push(val));
@@ -33,86 +38,73 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
-    this.chat.getUsers().subscribe(users => {
+    this.chat.getUsers().subscribe((users) => {
       this.userList = users;
-    })
-    this.chat.getMessage().subscribe(message => {
-      this.chat.messages.push(message)
-      console.log(message + "-------------line 41-------------")
-    })
-    this.chat.getAllMessages().subscribe(messageAll =>{
-      this.chat.messagesAll.push(messageAll)
-      console.log(messageAll + "---------line 46-----")
-    })
-    console.log(this.chat.chattingWith)
-    this.chat.chattingWith.subscribe(user => {
-      this.chattingWith = user
-      this.filter = { $or: [{from: user.id},{to: user.id}]}
-    })
+    });
+    this.chat.getMessage().subscribe((message) => {
+      this.chat.messages.push(message);
+      console.log(message + '-------------line 41-------------');
+    });
+    this.chat.getAllMessages().subscribe((messageAll) => {
+      this.chat.messagesAll.push(messageAll);
+      console.log(messageAll + '---------line 46-----');
+    });
+    console.log(this.chat.chattingWith);
+    this.chat.chattingWith.subscribe((user) => {
+      this.chattingWith = user;
+      this.filter = { $or: [{ from: user.id }, { to: user.id }] };
+    });
     let a;
-    this.auth.user$.subscribe( (val) => {
-     a = val.picture
-     const myTimeout = setTimeout(getPicture, 8000);
+    this.auth.user$.subscribe((val) => {
+      a = val.picture;
+      const myTimeout = setTimeout(getPicture, 8000);
 
       function getPicture() {
         this.authPicture = a;
-        console.log(this.authPicture + " ---- line64")
+        console.log(this.authPicture + ' ---- line64');
       }
+    });
 
-    })
-
-
-      console.log(this.authPicture + " -----line 66");
+    console.log(this.authPicture + ' -----line 66');
   }
 
   openChat(event, user) {
     console.log(user.value, user.key);
     this.chat.chattingWith.next({
       name: user.value,
-      id: user.key
-    })
+      id: user.key,
+    });
     this.chattingWith = {
       name: user.value,
-      id: user.key
-    }
-
+      id: user.key,
+    };
   }
 
   sendMessage() {
     if (this.chattingWith != undefined) {
-      console.log("in private")
+      console.log('in private');
       this.message = {
         message: this.messageText,
         to: this.chattingWith.id,
-        date: new Date()
-      }
+        date: new Date(),
+      };
       this.messageText = '';
-      this.chat.sendMessage(this.message)
-      console.log(this.chat.messages)
+      this.chat.sendMessage(this.message);
+      console.log(this.chat.messages);
     } else {
-      console.log("in general")
+      console.log('in general');
       this.message = {
         message: this.messageText,
-        date: new Date()
-      }
+        date: new Date(),
+      };
       this.chat.sendMessageToAll(this.message);
     }
-
   }
 
-
-  displayGeneral = true;
   displayPrivate = false;
-  onPress() {
-    this.displayGeneral = true;
-    this.displayPrivate = false;
-  }
-
 
   onPrivatePress() {
     this.displayPrivate = true;
-    this.displayGeneral = false;
   }
 }

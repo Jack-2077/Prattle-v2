@@ -20,11 +20,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { GeneralChatroomComponent } from './general-chatroom/general-chatroom.component';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { AuthButtonComponent } from './auth-button/auth-button.component';
 import { LoginComponent } from './login/login.component';
 import { MessagesComponent } from './messages/messages.component';
 
@@ -33,8 +31,6 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:5000/', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    AuthButtonComponent,
-    GeneralChatroomComponent,
     HomepageComponent,
     LoginComponent,
     MessagesComponent,
