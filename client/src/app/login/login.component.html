@@ -1,0 +1,11 @@
+<body>
+  <div class="center">
+    <h1>Welcome to Prattle please login or sign up!</h1>
+    <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+      <app-homepage></app-homepage>
+    </ng-container>
+    <ng-template #loggedOut>
+      <button id="login-btn" (click)="auth.loginWithRedirect()">Log in</button>
+    </ng-template>
+  </div>
+</body>

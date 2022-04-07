@@ -1,0 +1,29 @@
+#login-btn{
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 1px 0 rgba(0, 0, 0, 0.59);
+    background-color: rgba(48, 48, 48);
+    letter-spacing: 1px;
+    font-size: 12px;
+    border-radius: 2px;
+    overflow: hidden;
+    -webkit-transition: 0.2s ease-out;
+    transition: 0.2s ease-out;
+    font-family: sans-serif;
+    cursor:pointer;
+    border: none;
+    padding: 12px 20px 12px 20px;
+    margin: 5px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+body {
+  background-color: #7b1fa2;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+}

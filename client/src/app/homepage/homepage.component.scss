@@ -1,0 +1,63 @@
+#logout-btn {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 1px 0 rgba(0, 0, 0, 0.59);
+	background-color: rgba(48, 48, 48);
+  letter-spacing: 1px;
+	font-size: 12px;
+	border-radius: 2px;
+	overflow: hidden;
+	-webkit-transition: 0.2s ease-out;
+	transition: 0.2s ease-out;
+	font-family: sans-serif;
+	cursor:pointer;
+	border: none;
+	padding: 12px 20px 12px 20px;
+	margin: 5px;
+	text-align: center;
+	color: rgb(255, 255, 255);
+}
+
+.message-text{
+  color: white;
+}
+
+.message_to {
+  display: block;
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+  float: left;
+  clear: both;
+  margin-top: 15px;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+.message_from {
+  display: block; float: right;
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+  clear: both;
+  margin-top: 15px;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+.card-content {
+  padding-top: 15px;
+  max-height: 400px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.submit-button {
+  display:flex;
+  justify-content: flex-end;
+}
+
+.full-width {
+  width: 100%
+}
